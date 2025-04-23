@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, userLogOut } = useAuth();
 
   const navLinks = [
     { name: "My Notes", href: "/my-notes" },
     { name: "FAQ", href: "/faq" },
-    { name: "Sign In", href: "/sign-in" },
-    { name: "Get Started", href: "/sign-up" },
+    ...(user
+      ? [{ name: "Sign Out" }]
+      : [
+          { name: "Sign In", href: "/sign-in" },
+          { name: "Get Started", href: "/sign-up" },
+        ]),
   ];
+
+  const handleSignOut = () => {
+    userLogOut().then(() => console.log("Logged Out"));
+  };
 
   return (
     <nav className="bg-gray-500">
@@ -23,18 +33,28 @@ const Navbar = () => {
             NoteNest
           </Link>
           <div className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link key={link.name} to={link.href}>
+            {navLinks.map((link) =>
+              link.name === "Sign Out" ? (
                 <button
-                  className={`transition-all duration-300 ease-in-out transform px-4 py-2 cursor-pointer hover:scale-105 hover:text-yellow-300 ${
-                    link.name === "Get Started" &&
-                    "bg-stone-400 hover:bg-stone-600 rounded-2xl"
-                  }`}
+                  key={link.name}
+                  onClick={handleSignOut}
+                  className="transition-all duration-300 ease-in-out transform px-4 py-2 cursor-pointer hover:scale-105 hover:text-yellow-300"
                 >
                   {link.name}
                 </button>
-              </Link>
-            ))}
+              ) : (
+                <Link key={link.name} to={link.href}>
+                  <button
+                    className={`transition-all duration-300 ease-in-out transform px-4 py-2 cursor-pointer hover:scale-105 hover:text-yellow-300 ${
+                      link.name === "Get Started" &&
+                      "bg-stone-400 hover:bg-stone-600 rounded-2xl"
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                </Link>
+              )
+            )}
           </div>
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)}>
