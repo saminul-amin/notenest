@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router";
+import { AnimatePresence } from "framer-motion";
+import useAuth from "../hooks/useAuth";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
 
 const SignIn = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -60,8 +64,14 @@ const SignIn = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="flex justify-between text-sm font-medium text-gray-700 mb-1">
               Password
+              <button
+                onClick={() => setModalOpen(true)}
+                className="text-stone-500 hover:text-yellow-700 hover:underline font-medium transition duration-200 cursor-pointer"
+              >
+                Forgot Password?
+              </button>
             </label>
             <input
               type="password"
@@ -130,6 +140,11 @@ const SignIn = () => {
           </Link>
         </p>
       </div>
+      <AnimatePresence>
+        {isModalOpen && (
+          <ForgotPasswordModal onClose={() => setModalOpen(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
