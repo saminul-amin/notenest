@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import Faq from "./pages/FAQ.jsx";
+import MyNotes from "./pages/MyNotes.jsx";
 
 let router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ let router = createBrowserRouter([
       {
         path: "/faq",
         Component: Faq,
+      },
+      {
+        path: "/my-notes",
+        Component: MyNotes,
       },
     ],
   },

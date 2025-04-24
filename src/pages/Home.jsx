@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const Home = () => {
+  const { user } = useAuth();
+
   return (
     <motion.div
       className="bg-gray-300 min-h-screen flex flex-col items-center justify-center px-4"
@@ -21,11 +24,20 @@ const Home = () => {
           and managing notes smarter than ever before.
         </p>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Link to="/sign-up">
-            <button className="bg-stone-400 hover:bg-stone-600 text-white font-semibold px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105 cursor-pointer">
-              Get Started
-            </button>
-          </Link>
+          {user?.email ? (
+            <Link to="/my-notes">
+              <button className="bg-stone-400 hover:bg-stone-600 text-white font-semibold px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105 cursor-pointer">
+                My Notes
+              </button>
+            </Link>
+          ) : (
+            <Link to="/sign-up">
+              <button className="bg-stone-400 hover:bg-stone-600 text-white font-semibold px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105 cursor-pointer">
+                Get Started
+              </button>
+            </Link>
+          )}
+
           <Link to="/faq">
             <button className="bg-transparent border border-stone-500 text-stone-600 hover:bg-stone-400 hover:text-white px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105 cursor-pointer">
               Learn More
