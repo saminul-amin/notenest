@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "My Notes", href: "/my-notes" },
+    { name: "My Todo", href: "/todo-list" },
     { name: "FAQ", href: "/faq" },
     ...(user
       ? [{ name: "Sign Out" }]
@@ -23,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-500">
+    <nav className="bg-gray-500 bg-gradient-to-b from-gray-500 to-gray-400 opacity-90">
       <div className=" text-white p-4 max-w-7xl mx-auto">
         <div className="container mx-auto flex justify-between items-center">
           <Link

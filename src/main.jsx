@@ -10,31 +10,36 @@ import AuthProvider from "./providers/AuthProvider.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import Faq from "./pages/FAQ.jsx";
 import MyNotes from "./pages/MyNotes.jsx";
+import TodoPage from "./pages/TodoPage.jsx";
 
-let router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    element: <Root />,
     children: [
       {
-        path: "/",
-        Component: Home,
+        path: "",
+        element: <Home />,
       },
       {
-        path: "/sign-up",
-        Component: SignUp,
+        path: "sign-up",
+        element: <SignUp />,
       },
       {
-        path: "/sign-in",
-        Component: SignIn,
+        path: "sign-in",
+        element: <SignIn />,
       },
       {
-        path: "/faq",
-        Component: Faq,
+        path: "faq",
+        element: <Faq />,
       },
       {
-        path: "/my-notes",
-        Component: MyNotes,
+        path: "my-notes",
+        element: <MyNotes />,
+      },
+      {
+        path: "todo-list",
+        element: <TodoPage />,
       },
     ],
   },

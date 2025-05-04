@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
@@ -13,18 +14,45 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    createUser(data.email, data.password).then((res) => {
-      console.log(res.user);
-      navigate("/");
-    });
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: data.name, email: data.email }),
+    })
+      .then((res) => res.json())
+      .then((mongoData) => {
+        console.log("Success: ", mongoData);
+        if (mongoData.insertId !== null) {
+          createUser(data.email, data.password).then((res) => {
+            console.log(res.user);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Account Created Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: mongoData.message,
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+        }
+      });
   };
 
   const handleGoogleSignUp = () => {
-    userGoogleSignIn().then(res => {
-        console.log(res);
-        navigate("/");
+    userGoogleSignIn().then((res) => {
+      console.log(res);
+      navigate("/");
     });
-  } 
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
@@ -41,7 +69,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Enter your name"
               {...register("name", { required: "Name is required" })}
               className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-500 bg-white"
             />
@@ -57,7 +85,7 @@ const SignUp = () => {
             </label>
             <input
               type="email"
-              placeholder="you@example.com"
+              placeholder="Enter your Email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {

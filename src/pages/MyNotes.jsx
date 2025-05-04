@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Edit, Edit2, Edit2Icon, Trash, Trash2 } from "lucide-react";
+import { Edit2, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const dummyNotes = [
@@ -73,7 +73,9 @@ export default function MyNotes() {
   return (
     <div className="bg-gray-300 h-screen">
       <div className="p-6 max-w-6xl mx-auto relative">
-        <h2 className="text-3xl text-center font-bold mb-12 text-gray-800">My Notes</h2>
+        <h2 className="text-3xl text-center font-bold mb-12 text-gray-800">
+          My Notes
+        </h2>
 
         {/* Create Button */}
         <button
@@ -132,7 +134,7 @@ export default function MyNotes() {
                   <div className="flex justify-end">
                     <button
                       type="submit"
-                      className="bg-stone-500 text-white px-4 py-2 rounded-lg hover:bg-stone-700 cursor-pointer" 
+                      className="bg-stone-500 text-white px-4 py-2 rounded-lg hover:bg-stone-700 cursor-pointer"
                     >
                       Save Note
                     </button>
@@ -148,7 +150,7 @@ export default function MyNotes() {
           {notes.map((note, index) => (
             <motion.div
               key={note.id}
-              className="bg-gray-100 rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow border border-stone-300"
+              className="flex flex-col justify-around bg-gray-100 rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow border border-stone-300"
               custom={index}
               initial="hidden"
               animate="visible"
@@ -175,9 +177,9 @@ export default function MyNotes() {
               <div className="flex justify-end gap-2 mt-4">
                 <button
                   className="text-sm text-white bg-stone-300 px-3 py-2 rounded hover:bg-stone-500 cursor-pointer"
-                  onClick={() => alert("Edit functionality coming soon!")}
+                  onClick={() => alert("Under Construction")}
                 >
-                  <Edit2/>
+                  <Edit2 />
                 </button>
                 <button
                   className="text-sm text-white bg-stone-500 px-3 py-2 rounded hover:bg-stone-700 cursor-pointer"

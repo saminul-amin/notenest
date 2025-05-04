@@ -32,7 +32,7 @@ const Faq = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-10">
+    <div className="min-h-screen bg-gray-300 px-4 py-10">
       <div className="max-w-3xl mx-auto bg-stone-100 shadow-md rounded-xl p-6">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Frequently Asked Questions
