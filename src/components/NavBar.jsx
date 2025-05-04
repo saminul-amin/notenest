@@ -29,6 +29,7 @@ const Navbar = () => {
           <Link
             to={"/"}
             className="text-2xl font-bold transition-all duration-300 ease-in-out transform hover:scale-105 hover:text-yellow-300 cursor-pointer"
+            style={{fontFamily: '"Leckerli One", cursive'}}
           >
             NoteNest
           </Link>
